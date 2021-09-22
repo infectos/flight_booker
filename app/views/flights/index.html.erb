@@ -1,0 +1,37 @@
+<h1>Flights#index</h1>
+<p>Find me in app/views/flights/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <%= form_with url: flights_index_path, method: :get, class: "card mb-3" do |f| %>
+      <div class="row card-body">
+        <div class="col-md-3">
+          <%= f.label :origin, class: "form-label" %>
+          <%= f.collection_select :origin, Airport.order(:code), :id, :code, {selected: params[:origin]}, class: "form-select" %>
+        </div>
+        <div class="col-md-3">
+          <%= f.label :destination, class: "form-label" %>
+          <%= f.collection_select :destination, Airport.order(:code), :id, :code, {selected: params[:destination]}, class: "form-select" %>
+        </div>
+        <div class="col-md-3">
+          <%= f.label :date, "Date", class: "form-label" %>
+          <%= f.collection_select :date, Flight.distinct.select(:date).order(:date), :date, :date, {selected: params[:date]}, class: "form-select" %>
+        </div>
+        <div class="col-md-3">
+          <%= f.label :passengers_count, "Number of passengers", class: "form-label" %>
+          <%= f.select :passengers_count, (1..4), {selected: params[:passengers_count]}, class: "form-select" %>
+        </div>
+        <hr class="my-4">
+        <div class="col-md-6 offset-3">
+          <%= f.submit 'Search', class: 'w-100 btn btn-primary btn-lg' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+
+  <div class="row">
+    <%= render partial: 'result_booking_form', locals: {flights: @founded_flights} %>
+  </div>
+
+</div>
+

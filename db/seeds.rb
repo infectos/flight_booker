@@ -14,13 +14,18 @@ airports = Airport.create([
   { code: "NYC" },
 ])
 
+def random_time
+  Time.parse(Faker::Time.between(from: DateTime.now - 1, to: DateTime.now).to_s).strftime('%H:%M')
+  
+end
+
 5.times do |i|
   Flight.create([
-    { origin: airports.first, destination: airports.last, duration: 320, start: Faker::Time.forward(days:230) }
+    { origin: airports.first, destination: airports.last, duration: 320, date: Faker::Date.forward(days:5), time: random_time }
   ])
 end
 5.times do |i|
   Flight.create([
-    { destination: airports.first, origin: airports.last, duration: 320, start: Faker::Time.forward(days:230) }
+    { destination: airports.first, origin: airports.last, duration: 320, date: Faker::Date.forward(days:5), time: random_time }
   ])
 end
