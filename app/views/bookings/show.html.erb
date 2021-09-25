@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="px-4 py-5 my-5">
+    <h1 class="display-5 fw-bold text-center">Booking №<%= @booking.id %></h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4"><%= @booking.flight.text %></p>
+      <h2>Passengers</h2>
+      <div class="list-group mb-3">
+        <% @booking.passengers.each do |passenger| %>
+          <div class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+              <div>
+                <h6 class="mb-0"><%= passenger.name %></h6>
+                <p class="mb-0 opacity-75"><%= passenger.email %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+
+
+
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <%= link_to "To home page", root_path, class: "btn btn-primary btn-lg px-4 gap-3" %>
+      </div>
+    </div>
+  </div>
+</div>

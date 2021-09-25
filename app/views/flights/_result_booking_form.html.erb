@@ -1,7 +1,7 @@
-<%= form_with url: "bookings/new", method: "get", local: true, class: "mb-3" do |f| %>
-  <%= f.hidden_field :passenger_count, value: params[:passengers_count] %>
+<%= form_with url: new_booking_path, method: :get, local: true, class: "mb-3" do |f| %>
+  <%= f.hidden_field :passengers_count, value: params[:passengers_count] %>
 
-    <% if flights %>
+    <% if flights && flights.any? %>
       <%= f.collection_radio_buttons :flight_id, flights, :id, :text do |b| %>
         <%= b.label(class: "list-group-item d-flex gap-2") do %>
           <%= b.radio_button(class: "form-check-input flex-shrink-0") %>
@@ -11,10 +11,11 @@
         <% end %>
         
       <% end %>
+        <div class="col-md-6 mt-3 offset-3">
+          <%= f.submit 'Buy a ticket', class: "w-100 btn btn-primary btn-lg" %>
+        </div>
     <% end %>
-  <div class="col-md-6 mt-3 offset-3">
-    <%= f.submit 'Buy a ticket', class: "w-100 btn btn-primary btn-lg" %>
-  </div>
+
   
 <% end %>
       

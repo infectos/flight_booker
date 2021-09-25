@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="mb-3">Booking tickets</h4>
+      <%= form_with model: @booking do |f| %>
+        <%= f.hidden_field :flight_id %>
+        <%= f.fields_for :passengers do |passengers_form|  %>
+          <% passenger_number = (passengers_form.options[:child_index] + 1) %>
+
+          <h4 class="mb-3"><%= passenger_number.to_s + passenger_number.ordinal %> passenger info</h4>
+          <div class="row">
+            <div class="col-sm-6"> 
+              <%= passengers_form.label :name, class: "form-label" %>
+              <%= passengers_form.text_field :name, class: "form-control" %>
+              <% if passengers_form.object.errors[:name] %>
+                <% passengers_form.object.errors[:name].each do |error_message| %>
+                  <div class="error"><%= error_message %></div>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="col-sm-6">
+              <%= passengers_form.label :email, class: "form-label" %>
+              <%= passengers_form.email_field :email, class: "form-control" %>
+              <% if passengers_form.object.errors[:email] %>
+                <% passengers_form.object.errors[:email].each do |error_message| %>
+                  <div class="error"><%= error_message %></div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <hr class="my-4">
+        <% end %>
+        
+
+        <%= f.submit class: "w-100 btn btn-primary btn-lg" %>
+      <% end %>
+    </div>
+  </div>
+</div>

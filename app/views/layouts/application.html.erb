@@ -11,6 +11,16 @@
   </head>
 
   <body>
+    <% if notice || alert %>
+      <div class='flash-container'>
+        <% if notice %>
+          <div id="notice" class="alert alert-info"><%= notice %></div>
+        <% end %>
+        <% if alert %>
+          <div class="alert" class="alert alert-danger"><%= alert %></div>
+        <% end %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

@@ -1,24 +1,24 @@
-<h1>Flights#index</h1>
-<p>Find me in app/views/flights/index.html.erb</p>
+
 <div class="container">
+  <h1>Find flights</h1>
   <div class="row">
-    <%= form_with url: flights_index_path, method: :get, class: "card mb-3" do |f| %>
+    <%= form_with model: @flight, url: flights_index_path, method: :get, local: true, class: "card mb-3" do |f| %>
       <div class="row card-body">
         <div class="col-md-3">
-          <%= f.label :origin, class: "form-label" %>
-          <%= f.collection_select :origin, Airport.order(:code), :id, :code, {selected: params[:origin]}, class: "form-select" %>
+          <%= f.label :origin_id, class: "form-label" %>
+          <%= f.collection_select :origin_id, Airport.order(:code), :id, :code, {},class: "form-select" %>
         </div>
         <div class="col-md-3">
-          <%= f.label :destination, class: "form-label" %>
-          <%= f.collection_select :destination, Airport.order(:code), :id, :code, {selected: params[:destination]}, class: "form-select" %>
+          <%= f.label :destination_id, class: "form-label" %>
+          <%= f.collection_select :destination_id, Airport.order(:code), :id, :code, {},class: "form-select" %>
         </div>
         <div class="col-md-3">
           <%= f.label :date, "Date", class: "form-label" %>
-          <%= f.collection_select :date, Flight.distinct.select(:date).order(:date), :date, :date, {selected: params[:date]}, class: "form-select" %>
+          <%= f.collection_select :date, Flight.distinct.select(:date).order(:date), :date, :date, {},class: "form-select" %>
         </div>
         <div class="col-md-3">
-          <%= f.label :passengers_count, "Number of passengers", class: "form-label" %>
-          <%= f.select :passengers_count, (1..4), {selected: params[:passengers_count]}, class: "form-select" %>
+          <%= label_tag :passengers_count, "Number of passengers", class: "form-label" %>
+          <%= select_tag :passengers_count, options_for_select(1..4, selected: params[:passengers_count]) , class: "form-select" %>
         </div>
         <hr class="my-4">
         <div class="col-md-6 offset-3">

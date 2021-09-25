@@ -1,10 +1,17 @@
 class FlightsController < ApplicationController
   def index
-    @founded_flights = Flight.where(search_params)
+    if params[:flight]
+      @flight = Flight.new(flight_params)
+      @founded_flights = Flight.where(flight_params)
+    else
+      @flight = Flight.new
+    end
 
   end
 
-  def search_params
-    params.permit(:origin, :destination, :date)
+  private
+  
+  def flight_params
+    params.require(:flight).permit(:origin_id, :destination_id, :date)
   end
 end
